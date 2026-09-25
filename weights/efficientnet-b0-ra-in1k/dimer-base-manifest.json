@@ -3,22 +3,22 @@
   "formatVersion": 1,
   "modelKey": "efficientnet-b0-ra-in1k",
   "modelId": "timm/efficientnet_b0.ra_in1k",
-  "revision": "unpinned",
+  "revision": "1b5383e5f79cc0f7fc067e372f8f26a5fa73f26a",
   "files": [
     {
       "path": "README.md",
       "bytes": 4719,
-      "sha256": null
+      "sha256": "37ff0cceacfdf24a7393c92be3a3a34ad1753f307c8a57562c0dda1a090e31c4"
     },
     {
       "path": "config.json",
       "bytes": 578,
-      "sha256": null
+      "sha256": "c8146deb938c28e0e895b1d2d437d204aa757cb76a5d53c76120e259fe4efe92"
     },
     {
       "path": "model.safetensors",
       "bytes": 21355344,
-      "sha256": null
+      "sha256": "d569899762ea9b1384ee07f4af64805cf8caa1c55f9253ebb1080dc40e87a2cd"
     }
   ],
   "totalBytes": 21360641

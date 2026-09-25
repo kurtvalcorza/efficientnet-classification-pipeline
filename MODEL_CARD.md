@@ -18,7 +18,7 @@ date_published_source: "month of the EfficientNet paper (arXiv:1905.11946, submi
 > ⚠️ **Provided for research, training, and evaluation purposes only.** Model weights are redistributed unmodified under their upstream license, which controls your use, including any commercial use or redistribution; the accompanying code and notebooks are released under this repository's license. All of it is supplied **"as is"**, without warranty of any kind, and has not been validated for production, clinical, or safety-critical use. Running the notebooks downloads third-party weights and datasets governed by their own licenses and consumes compute on your own Colab/Kaggle account. To the maximum extent permitted by law, the maintainers of this repository and the DIMER platform accept no liability for any damages arising from their use. Hosting implies no affiliation with or endorsement by the original authors.
 
 > [!IMPORTANT]
-> The upstream snapshot is **not yet pinned**. `MODEL_REVISION` is the sentinel `"unpinned"` and the manifest records no SHA-256 digests. Until `python tools/pin_snapshot.py` records an immutable commit and every file's digest, the package refuses to stage, verify or load the weights, and the tutorial cannot run.
+> The upstream snapshot is pinned to Hub commit `1b5383e5f79cc0f7fc067e372f8f26a5fa73f26a`, and the manifest records every file's SHA-256. No execution with the pinned weights has been recorded yet, so this card claims no measured value for this repository.
 
 ---
 
@@ -40,7 +40,7 @@ This repository adds gradient fine-tuning on a caller's labelled images. `from_p
 
 What this repository adds to the upstream weights:
 
-- `verify_snapshot` and `stage_missing_files`: manifest checks and staging of the pinned files, both refusing to run while the snapshot is unpinned;
+- `verify_snapshot` and `stage_missing_files`: manifest checks and staging of the pinned files, both refusing to run if `MODEL_REVISION` is ever reset to the `"unpinned"` sentinel;
 - `EfficientNetPipeline.from_pretrained`: construction with `timm.create_model(..., pretrained=False)`, so timm downloads nothing itself, then `load_state_dict(strict=True)` from the verified SafeTensors file;
 - `predict`: input checks and top-k softmax scores; `zero_shot_evaluate`: a baseline that maps groups of ImageNet classes onto task labels without training;
 - `fetch_sample_archive`, `read_class_archive`, `read_class_folder`, `validate_dataset`, `split_dataset`, `validate_inputs` and `evaluation_report`: the data acquisition, validation and single-batch evaluation stages;
@@ -162,7 +162,7 @@ Some sensitive uses are foreseeable although not intended: triage of medical or 
 
 ###### Mitigations
 
-- **Supply-chain integrity:** while `MODEL_REVISION` is `"unpinned"`, `verify_snapshot`, `stage_missing_files` and `from_pretrained` raise before any download or model import. Once pinned, `stage_missing_files` refuses a manifest whose `modelId` or `revision` differs from the package constants. It fetches only manifest-listed files, and only with `allow_download=True`. `verify_snapshot` checks every file's byte size and SHA-256 and refuses an entry with no recorded digest. `from_pretrained` builds the architecture with `pretrained=False` and loads the verified SafeTensors file with `strict=True`. The upstream `pytorch_model.bin` pickle is not in the manifest and is never staged.
+- **Supply-chain integrity:** if `MODEL_REVISION` were reset to `"unpinned"`, `verify_snapshot`, `stage_missing_files` and `from_pretrained` would raise before any download or model import. At the pinned revision, `stage_missing_files` refuses a manifest whose `modelId` or `revision` differs from the package constants. It fetches only manifest-listed files, and only with `allow_download=True`. `verify_snapshot` checks every file's byte size and SHA-256 and refuses an entry with no recorded digest. `from_pretrained` builds the architecture with `pretrained=False` and loads the verified SafeTensors file with `strict=True`. The upstream `pytorch_model.bin` pickle is not in the manifest and is never staged.
 - **Data integrity:** `fetch_sample_archive` downloads the sample at a fixed dataset commit and checks its size and SHA-256 before it is opened, with no fallback. `read_class_archive` refuses absolute member names and `..` segments and bounds the member count and the uncompressed size before decompressing anything; `read_class_folder` refuses files that link outside the directory.
 - **Tests of those refusals:** tests assert that an unpinned package, a missing snapshot and a tampered digest are all refused before `torch`, `timm` or `safetensors` is imported. Others assert that the committed `config.json` agrees with the manifest size and with timm's built-in preprocessing, that the ImageNet groups name the classes stated above, and that a frozen fine-tune leaves every backbone weight and BatchNorm statistic unchanged.
 - **Input integrity:** `validate_inputs` and `predict` share one checker for type, batch size, image size and `top_k`. `validate_dataset` rejects a record with missing keys, a non-image, an out-of-range image, an unknown label or a class with fewer than 2 images. It reports class imbalance and pixel-identical duplicates as findings.
@@ -195,9 +195,9 @@ The following uses are prohibited even where the model would work:
 ## Immutable provenance
 
 - Model: `timm/efficientnet_b0.ra_in1k`
-- Revision: **not yet pinned** (`MODEL_REVISION = "unpinned"`). `python tools/pin_snapshot.py` resolves the Hub's `main` to a 40-hex commit, downloads every manifest file at that commit, and records each file's SHA-256.
-- Snapshot manifest: `weights/efficientnet-b0-ra-in1k/dimer-base-manifest.json`, 3 files, `totalBytes` 21360641. The byte sizes are the ones the Hub reported for its `main` branch when this repository was built.
-- `model.safetensors`: 21,355,344 bytes; SHA-256 not yet recorded.
+- Revision: `1b5383e5f79cc0f7fc067e372f8f26a5fa73f26a` (pinned 2026-09-25 by `python tools/pin_snapshot.py`, which resolved the Hub's `main` to this commit, downloaded every manifest file at it, and recorded each file's SHA-256).
+- Snapshot manifest: `weights/efficientnet-b0-ra-in1k/dimer-base-manifest.json`, 3 files, `totalBytes` 21360641. The byte sizes and digests describe the files at the pinned commit.
+- `model.safetensors`: 21,355,344 bytes; SHA-256 `d569899762ea9b1384ee07f4af64805cf8caa1c55f9253ebb1080dc40e87a2cd` (matches the Hub's LFS record).
 - `config.json`: 578 bytes; `efficientnet_b0`, tag `ra_in1k`, 1000 classes, 224×224 input, bicubic, `crop_pct` 0.875, ImageNet mean and standard deviation, classifier module `classifier`.
 - `README.md`: 4,719 bytes; the upstream model card.
 - Loader: `timm.create_model("efficientnet_b0.ra_in1k", pretrained=False, num_classes=1000)`, then `load_state_dict(safetensors.torch.load_file(<verified file>), strict=True)`.

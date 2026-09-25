@@ -24,7 +24,7 @@ from PIL import Image
 from .data import validate_dataset
 
 MODEL_ID = "timm/efficientnet_b0.ra_in1k"
-MODEL_REVISION = "unpinned"
+MODEL_REVISION = "1b5383e5f79cc0f7fc067e372f8f26a5fa73f26a"
 MODEL_LICENSE = "apache-2.0"
 MODEL_KEY = "efficientnet-b0-ra-in1k"
 DEFAULT_WEIGHTS_DIR = Path(__file__).resolve().parents[2] / "weights" / MODEL_KEY
