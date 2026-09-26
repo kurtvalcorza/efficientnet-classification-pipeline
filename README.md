@@ -2,7 +2,7 @@
 
 DIMER pipeline for **EfficientNet-B0 trained on ImageNet-1k in timm** (`timm/efficientnet_b0.ra_in1k`), a compact convolutional classifier. The pipeline loads the checkpoint only from a digest-verified local snapshot, returns top-k softmax scores over the ImageNet-1k classes, and adds a bounded fine-tuning workflow that replaces the head for a new set of classes, compares it with majority-class and zero-shot baselines, and exports a SafeTensors adapter.
 
-> **The upstream snapshot is pinned** to Hub commit `1b5383e5f79cc0f7fc067e372f8f26a5fa73f26a` (pinned 2026-09-25). The manifest records every file's byte size and SHA-256, and each LFS digest matched the Hub's record. No execution with the pinned weights is recorded yet (see [Release status](#release-status)).
+> **The upstream snapshot is pinned** to Hub commit `1b5383e5f79cc0f7fc067e372f8f26a5fa73f26a` (pinned 2026-09-25). The manifest records every file's byte size and SHA-256, and each LFS digest matched the Hub's record. Default-path execution recorded on 2026-09-26 (Kaggle T4); REL12 BYOD exercise pending before promotion (see [Release status](#release-status)).
 
 ## Upstream alignment
 
@@ -66,7 +66,7 @@ weights/efficientnet-b0-ra-in1k/
 
 ## Release status
 
-**Candidate.** The snapshot is pinned (`1b5383e`), but no execution with the pinned weights is recorded. Static checks, unit tests and the small-model test do not constitute notebook execution evidence; `docs/release-verification.md` defines the release gate.
+**Candidate.** The snapshot is pinned (`1b5383e`). Default-path execution recorded on 2026-09-26 (Kaggle T4): the exact notebook blob `fbcb57dc1362` (commit `9dce015`) ran top-to-bottom with both BYOD branches off. On one seeded split of 60 held-out CIFAR-10 thumbnails, accuracy was 0.9667 for the zero-shot ImageNet mapping and 1.000 for the fine-tuned head (majority baseline 0.500, untrained head 0.5167), a two-image difference and no measurable gain; 46 of those 60 held-out images have their same-numbered duplicate counterpart in the training split; one runtime. REL12 BYOD exercise pending before promotion: release step 7 has not been run. Static checks, unit tests and the small-model test do not constitute notebook execution evidence; `docs/release-verification.md` defines the release gate.
 
 ## Documentation
 
