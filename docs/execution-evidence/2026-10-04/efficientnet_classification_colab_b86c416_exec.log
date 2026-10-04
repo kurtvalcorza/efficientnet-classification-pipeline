@@ -1,0 +1,223 @@
+[colab] Parsing notebook '/home/kurt/colab-runs/efficientnet-classification-pipeline-b86c416-344579/efficientnet_classification_colab_b86c416_colab-cli-t4.ipynb'...
+[colab] Executing cell 1/16 - Infrastructure: install the locked runtime into an isolated environment...
+{'isolated_environment': '/content/dimer_isolated_env', 'isolated_python': '3.12.12', 'kernel_python': '3.13.15', 'locked_packages': 44, 'setup_seconds': 53}
+[colab] Executing cell 2/16 - Route the remaining cells to the isolated environment...
+Every later code cell now runs in /content/dimer_isolated_env/bin/python (pid 1527).
+[colab] Executing cell 3/16 - efficientnet_classification-07...
+{'notebook_source': {'repository': 'efficientnet-classification-pipeline', 'repository_revision': '05f8d9824c50466d13d7d7024ea65938fa322623', 'embedded_module': 'src/efficientnet_classification_pipeline/pipeline.py', 'embedded_modules': ['src/efficientnet_classification_pipeline/data.py', 'src/efficientnet_classification_pipeline/pipeline.py'], 'module_sha256': '7f9a243fc16ac5e2b5e763c39f9dd9430ff55e014ef44eda74b97f011d22736c', 'generator': 'build_notebook.py/2.1', 'notebook_spec': '2.2'}, 'python': '3.12.12', 'torch': '2.14.0+cu130', 'torchvision': '0.29.0+cu130', 'timm': '1.0.29', 'numpy': '2.5.3', 'PIL': '11.3.0', 'cuda': True}
+[colab] Executing cell 4/16 - efficientnet_classification-09...
+[colab] Executing cell 5/16 - efficientnet_classification-11...
+[colab] Executing cell 6/16 - efficientnet_classification-13...
+{'model_id': 'timm/efficientnet_b0.ra_in1k', 'revision': '1b5383e5f79cc0f7fc067e372f8f26a5fa73f26a', 'license': 'apache-2.0', 'files': 3, 'total_bytes': 21360641}
+{'weights_dir': '/content/weights/efficientnet-b0-ra-in1k', 'fetched': ['README.md', 'config.json', 'model.safetensors']}
+{'verified_files': 3, 'revision': '1b5383e5f79cc0f7fc067e372f8f26a5fa73f26a'}
+{'device': 'cuda:0', 'source': '/content/weights/efficientnet-b0-ra-in1k'}
+[colab] Executing cell 7/16 - efficientnet_classification-15...
+{'dataset_id': 'Cleanlab/cifar-10-subset', 'revision': 'bb5a7aabf1d14d2d1e3e49d0d8f917bda3622f75', 'license': 'mit', 'bytes': 986707, 'sha256': '66f90a4f87d865e8eb653b62f10e754684075a32314177de76832349d4b1fb19', 'fetched': True}
+{
+  "n_records": 400,
+  "class_names": [
+    "frog",
+    "truck"
+  ],
+  "images_per_class": {
+    "frog": 200,
+    "truck": 200
+  },
+  "image_side_px": [
+    32,
+    32
+  ],
+  "duplicate_groups": 100,
+  "epochs": 5,
+  "findings": [
+    "100 group(s) of pixel-identical images, e.g. ['CIFAR-10-subset/darkened_images/truck/image_0.png', 'CIFAR-10-subset/original_images/truck/image_0.png']"
+  ],
+  "verdict": "accepted"
+}
+{
+  "records": 400,
+  "groups": 200,
+  "groups_with_duplicates": 200,
+  "records_in_duplicate_groups": 400,
+  "exact_copies": 100,
+  "near_duplicate_links": 100,
+  "mixed_label_groups": 0,
+  "mixed_label_examples": [],
+  "method": "pixel digest, or 16x16 grayscale correlation >= 0.95"
+}
+<PIL.Image.Image image mode=RGB size=512x128 at 0x7C79CE5955B0>
+
+[Image saved to: /tmp/tmpw9zpsqjz.png]
+[colab] Executing cell 8/16 - efficientnet_classification-17...
+{
+  "train": 280,
+  "held_out": 60,
+  "unseen": 60,
+  "train_majority": "frog",
+  "duplicates_across_splits": {
+    "held_out": {
+      "records": 60,
+      "pixel_copy_in_reference": 0,
+      "near_duplicate_in_reference": 0
+    },
+    "unseen": {
+      "records": 60,
+      "pixel_copy_in_reference": 0,
+      "near_duplicate_in_reference": 0
+    },
+    "unseen_vs_held_out": {
+      "records": 60,
+      "pixel_copy_in_reference": 0,
+      "near_duplicate_in_reference": 0
+    }
+  }
+}
+frog -> [('fox squirrel', 0.165), ('marmoset', 0.045), ('howler monkey', 0.031), ('langur', 0.026), ('spider monkey', 0.026)]
+frog -> [('marmoset', 0.421), ('fox squirrel', 0.343), ('frilled lizard', 0.036), ('titi', 0.017), ('patas', 0.01)]
+truck -> [('moving van', 0.05), ('milk can', 0.047), ('can opener', 0.046), ('cassette player', 0.039), ('revolver', 0.03)]
+truck -> [('moving van', 0.05), ('milk can', 0.047), ('can opener', 0.046), ('cassette player', 0.039), ('revolver', 0.03)]
+{'verdict': 'sample-sanity', 'metrics': [(1, 0.5), (5, 0.5)]}
+{
+  "accuracy": 0.9666666666666667,
+  "balanced_accuracy": 0.9666666666666667,
+  "majority_baseline_accuracy": 0.5,
+  "mean_group_mass": 0.3177121579647064,
+  "per_class_recall": {
+    "frog": 0.9333333333333333,
+    "truck": 1.0
+  }
+}
+[colab] Executing cell 9/16 - efficientnet_classification-19...
+{
+  "blank": [
+    [
+      "can opener",
+      0.011
+    ],
+    [
+      "envelope",
+      0.009
+    ],
+    [
+      "corkscrew",
+      0.009
+    ]
+  ],
+  "noise": [
+    [
+      "rapeseed",
+      0.036
+    ],
+    [
+      "pole",
+      0.01
+    ],
+    [
+      "nematode",
+      0.008
+    ]
+  ]
+}
+[colab] Executing cell 10/16 - efficientnet_classification-21...
+{'class_names': ['frog', 'truck'], 'reinitialised': ['classifier.'], 'device': 'cuda:0'}
+{'accuracy': 0.6, 'balanced_accuracy': 0.6, 'per_class_recall': {'frog': 0.2, 'truck': 1.0}}
+[colab] Executing cell 11/16 - efficientnet_classification-23...
+epoch 1/5  loss 0.4776
+epoch 2/5  loss 0.1553
+epoch 3/5  loss 0.0688
+epoch 4/5  loss 0.0311
+epoch 5/5  loss 0.0148
+{
+  "freeze_backbone": false,
+  "trainable_parameters": 4010110,
+  "total_parameters": 4010110,
+  "epochs": 5,
+  "batch_size": 16,
+  "learning_rate": 0.0001,
+  "optimizer": "AdamW",
+  "augmentation": "none (evaluation transform)",
+  "precision": "float32",
+  "device": "cuda:0",
+  "train_seconds": 9.9
+}
+[colab] Executing cell 12/16 - efficientnet_classification-25...
+method                         correct  accuracy      95% Wilson  balanced
+majority class                   30/60     0.500  [0.377, 0.623]     0.500
+zero-shot ImageNet mapping       58/60     0.967  [0.886, 0.991]     0.967
+untrained two-class head         36/60     0.600  [0.474, 0.714]     0.600
+fine-tuned                       60/60     1.000  [0.940, 1.000]     1.000
+confusion (rows true, columns predicted): {'labels': ['frog', 'truck'], 'rows_true_cols_predicted': [[30, 0], [0, 30]]}
+reading: fine-tuned 60/60 and zero-shot 58/60: the 95% Wilson intervals overlap, so this split cannot tell them apart
+{'run': 0, 'freeze_backbone': False, 'per_class': 200, 'epochs': 5, 'learning_rate': 0.0001, 'trainable_parameters': 4010110, 'held_out_n': 60, 'zero_shot_accuracy': 0.9667, 'fine_tuned_accuracy': 1.0, 'final_loss': 0.0148, 'train_seconds': 9.9}
+[colab] Executing cell 13/16 - efficientnet_classification-27...
+{'correct': 60, 'n': 60, 'accuracy': 1.0, 'wilson_95': [0.9398, 1.0], 'balanced_accuracy': 1.0}
+[
+  {
+    "id": "CIFAR-10-subset/darkened_images/frog/image_15.png",
+    "truth": "frog",
+    "predicted": "frog",
+    "score": 0.9869
+  },
+  {
+    "id": "CIFAR-10-subset/original_images/frog/image_15.png",
+    "truth": "frog",
+    "predicted": "frog",
+    "score": 0.9867
+  },
+  {
+    "id": "CIFAR-10-subset/darkened_images/frog/image_75.png",
+    "truth": "frog",
+    "predicted": "frog",
+    "score": 0.9641
+  },
+  {
+    "id": "CIFAR-10-subset/original_images/frog/image_75.png",
+    "truth": "frog",
+    "predicted": "frog",
+    "score": 0.974
+  },
+  {
+    "id": "CIFAR-10-subset/darkened_images/frog/image_58.png",
+    "truth": "frog",
+    "predicted": "frog",
+    "score": 0.9834
+  },
+  {
+    "id": "CIFAR-10-subset/original_images/frog/image_58.png",
+    "truth": "frog",
+    "predicted": "frog",
+    "score": 0.9959
+  }
+]
+{'blank': [('truck', 0.513), ('frog', 0.487)], 'noise': [('truck', 1.0), ('frog', 0.0)]}
+[colab] Executing cell 14/16 - efficientnet_classification-29...
+{
+  "path": "outputs/efficientnet_adapter.safetensors",
+  "bytes": 16241992,
+  "sha256": "cc52a92f30d1bcc13a0eea01ba1609a12a23dc6bfc66f6397b54b1ac30b24d56",
+  "format": "efficientnet-adapter-v1",
+  "class_names": [
+    "frog",
+    "truck"
+  ],
+  "tensors": 360,
+  "frozen_prefixes": [],
+  "base_state_digest": "d569899762ea9b1384ee07f4af64805cf8caa1c55f9253ebb1080dc40e87a2cd",
+  "model_id": "timm/efficientnet_b0.ra_in1k",
+  "model_revision": "1b5383e5f79cc0f7fc067e372f8f26a5fa73f26a"
+}
+{'reloaded_source': 'artifact:efficientnet_adapter.safetensors', 'adapted': True, 'class_names': ['frog', 'truck']}
+{'images_compared': 60, 'tolerance': 0.0001, 'equivalent': True}
+[colab] Executing cell 15/16 - efficientnet_classification-31...
+  efficientnet_adapter.safetensors                   16,241,992 bytes
+  efficientnet_classification_evaluation_report.json          791 bytes
+  efficientnet_classification_input_manifest.json         1,320 bytes
+  efficientnet_classification_predictions.csv            15,366 bytes
+  efficientnet_classification_result.json                13,001 bytes
+[colab] Executing cell 16/16 - efficientnet_classification-33...
+refused as expected: non-image object -> TypeError: images must be a PIL.Image.Image or a sequence of them
+refused as expected: class with one image -> ValueError: every class needs at least 2 images to split; short classes: {'frog': 1, 'truck': 1}
+BYOD image branch is off; set USE_BYOD_IMAGE = True to classify your own image.
+BYOD dataset branch is off; set USE_BYOD_DATASET = True to adapt EfficientNet-B0 on your own class folders.
+[colab] Saving notebook with outputs to '/home/kurt/colab-runs/efficientnet-classification-pipeline-b86c416-344579/efficientnet_classification_colab_b86c416_colab-cli-t4_output.ipynb'...
