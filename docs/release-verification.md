@@ -4,6 +4,8 @@
 
 The upstream snapshot is pinned to `1b5383e5f79cc0f7fc067e372f8f26a5fa73f26a` and the notebook is regenerated with that revision and manifest, so it can run. One default-path execution is recorded below (2026-09-26, Kaggle T4); it completed only after a manual restart following the install cell, so it is **not a one-pass `Run all` and not promotion evidence**. Since 2026-10-04 (review fixes EFN-M1..M4, EFN-m1..m3) the notebook builds an isolated `uv` Python 3.12.12 environment from the hash-locked `tutorials/requirements-colab.lock.txt` (Linux x86_64 runtimes only), splits the sample by duplicate group and reports counts with 95% Wilson intervals; that revision (commit `b86c416`, blob `4ed706bc670e`) ran once on a fresh Colab Tesla T4 on 2026-10-04 by Colab CLI sequential execution: 16/16 code cells in one pass, no restart, 0 errors (record below). That run is not a browser `Run all` and exercised the default path only. Release step 7 (REL12) has not been exercised, so the status stays `Candidate`.
 
+The current blob `3551fd0a` (code commit `2aa169a`) shows a refused BYOD input as one `Refused: <file>: <reason>` line with no traceback, removes the earlier run's results and `outputs/` files and stops Run all at that cell, while genuine failures keep their traceback (NOTEBOOK_SPEC DAT19/DAT20); its hosted Colab T4 runs (the default path and a scripted refusal, `USE_BYOD_IMAGE=True;BYOD_IMAGE_PATH='/etc/hostname'`) are pending, and the hosted runs of earlier blobs, including `4ed706bc670e`, are history for it (REL14).
+
 ## Automatic coverage (static and unit, every pull request)
 
 CI installs the pinned CPU-only torch wheel and the other runtime pins, then runs:
