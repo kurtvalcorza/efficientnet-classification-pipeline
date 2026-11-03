@@ -1,0 +1,80 @@
+{
+  "repo": "efficientnet-classification-pipeline",
+  "sha": "a8c0a1ad629c1a238ef8d6209518ec2e66eed78d",
+  "notebook": "tutorials/efficientnet_classification_colab.ipynb",
+  "blob": "db384c6e135cc0cfa23dd4078fadae93d621c1f1",
+  "gpu": "T4",
+  "session": "suite-efficientnet-a8c0a1a-3445",
+  "started_utc": "2026-11-02T18:43:16+00:00",
+  "runner": "Colab CLI `colab exec -f` on a fresh session (not a browser Run all)",
+  "overrides": [
+    {
+      "name": "USE_BYOD_IMAGE",
+      "from": "False",
+      "to": "True"
+    },
+    {
+      "name": "BYOD_IMAGE_PATH",
+      "from": "\\\"\\\"",
+      "to": "'/etc/hostname'"
+    }
+  ],
+  "run_copy_blob": "946a5a8758a0729864589f7f9f812f26388fa395",
+  "run_copy_sha256": "2b4f8b471e20395609893602bfbd000d9f6b1de982f9fb3afbf1842928be23b6",
+  "run_copy_note": "refusal run: the run copy is the committed notebook with the listed assignment overrides, cut immediately after the refusal cell and re-serialised (nbformat layout); input_unchanged compares against that copy",
+  "truncated_after_cell": "efficientnet_classification-33",
+  "refusal_cell_ref": "efficientnet_classification-33",
+  "refusal_cell_index": 16,
+  "cells_dropped": 1,
+  "code_cells_dropped": 0,
+  "original_sha256": "a15a7830bcacaf1b42f7c586ab502fa30b923c5385b811bd70188dc141baa591",
+  "status": "[suite-efficientnet-a8c0a1a-3445] gpu-t4-s-use1c0-2oa1rk1ab6rco | Hardware: T4 | Shape: Standard | Variant: GPU | Status: IDLE",
+  "exec_exit_code": 0,
+  "stopped": true,
+  "stop_verified": true,
+  "wall_s": 111.1,
+  "input_unchanged": true,
+  "executed_file": "efficientnet_classification_colab_a8c0a1a_colab-cli-t4_output.ipynb",
+  "log_cells": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16
+  ],
+  "log_total": 16,
+  "code_cells": 16,
+  "executed_cells": 14,
+  "errors": [
+    {
+      "cell": "efficientnet_classification-33",
+      "ename": "IsolatedCellRefusal",
+      "evalue": "hostname: not an image PIL can open (cannot identify image file '/etc/hostname'); set BYOD_IMAGE_PATH to a .png, .jpg, .bmp or .webp file and run this cell again (the earlier results of this session and their outputs/ files were removed)."
+    }
+  ],
+  "execution_counts": [],
+  "sequential": null,
+  "executed_sha256": "786f16a6541933d4a06d8b3c851503f0284e7313aaa3f84ab00fd74ee5f4a12b",
+  "log_sequential_complete": true,
+  "mode": "expect_refusal",
+  "refusal_line": "Refused: hostname: not an image PIL can open (cannot identify image file '/etc/hostname'); set BYOD_IMAGE_PATH to a .png, .jpg, .bmp or .webp file and run this cell again (the earlier results of this session and their outputs/ files were removed).",
+  "halting_cell_index": 16,
+  "halting_cell_id": "efficientnet_classification-33",
+  "error_cells": [
+    16
+  ],
+  "refusal_fail_reasons": [],
+  "refusal_ok": true,
+  "verdict": "PASS"
+}
